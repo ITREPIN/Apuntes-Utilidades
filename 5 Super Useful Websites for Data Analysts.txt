@@ -1,0 +1,27 @@
+5 Webs útiles para Analistas de Datos 
+
+1. Kaggle
+Es para cualquier analista que quiera participar en competencias de datos, encontrar conjuntos de datos públicos (API públicas), aprender nuevas habilidades de datos.
+
+2. StackoverFlow
+¿Atascado con Excel? ,SQL? o un código de Python que no funciona?
+Bueno, Stack Overflow es tu respuesta.
+
+Piensen en ello como Quora o Reddit.
+Casi todos los problemas tienen una respuesta. (Eso si, en inglés)
+
+3. Excalidraw
+Es una herramienta de pizarra/diseñador visual que puedes utilizar para dibujar flujos de datos, pilas tecnológicas, flujos ETL, hojas de ruta de datos, arquitecturas de sistemas y muchos más.
+Estos dibujos a menudo se usan en presentaciones para usuarios de negocio y realmente ayudan a dar vida a cualquier reunión en la que necesite presentar el movimiento de datos o un plan técnico a una persona que no tiene datos.
+
+4. Google Trends
+Google Trends es la web definitiva para descubrir cualquier tendencia en el mundo.
+Lenguajes de programación, marcas de moda, guerras de consolas, celebridades, lo que sea, las tendencias de Google tienen datos sobre todos ellos.
+Puedes comparar hasta 4 tendencias en cualquier región geográfica o período de tiempo e incluso ver las tendencias de YouTube también. Es un gran sitio web para validar si un producto o idea es realmente tendencia o no.
+
+5. Flaticon
+La mayoría de los analistas de datos dedican tiempo a las llamadas de Zoom, Teams o Hangout, presentando hallazgos de datos y analizando información.
+Para mejorar esas presentaciones, necesita elementos visuales e íconos.
+Aquí es donde entra Flaticon, tiene una enorme biblioteca de infografías que puedes descargar y pegar en tus presentaciones.
+
+https://medium.com/codex/5-super-useful-websites-for-data-analysts-e07629a93b74
