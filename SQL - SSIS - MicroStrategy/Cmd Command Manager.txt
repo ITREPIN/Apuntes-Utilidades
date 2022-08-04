@@ -1,0 +1,5 @@
+COMANDOS COMMAND MANAGER
+
+LIST ALL FEATURE FLAGS; --Lista todos los flags de Micro
+ALTER FLAG "Creación de Celdas" ON; --modificar un flags
+EXECUTE DATA LOAD "Data Load - All projects"  IN ENTERPRISE MANAGER  "agdgdap06" IN PORT 9999; --Ejecutar el trigger que ejecuta los SP para actualizar las estadisticas de micro
