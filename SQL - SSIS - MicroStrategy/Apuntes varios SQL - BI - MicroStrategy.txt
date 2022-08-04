@@ -1,0 +1,83 @@
+APUNTES BI - MICROSTRATEGY:
+
+-QUERY DUMMY DB2
+SELECT DATE('2013-01-01')   
+FROM SYSIBM.SYSDUMMY1
+
+SSIS Package Configuration
+
+SELECT * FROM DWCONFIG.dbo.[SSIS Configurations] WHERE ConfigurationFilter like '%AS400%'
+	Esta tabla tiene 3 columnas
+	-Por Variable de entorno
+		
+
+		
+PARA IDENTIFICAR DONDE ESTÁ ALMACENADO EN MICRO UN DOSSIER/OBJETO DEL LIBRARY:
+Se copia el ID del objeto (tomarlo de la URL) y se filtra en la tabla: [MSTR_MD_2020].[dbo].[DSSMDOBJINFO]
+SELECT * FROM [MSTR_MD_2020].[dbo].[DSSMDOBJINFO] WHERE OBJECT_ID= dbo.fn_CharToUniqueidentifier( '07F34D0B4A981B1D6211F38652F9347A') -->Buscar el objeto
+SELECT * FROM [MSTR_MD_2020].[dbo].[DSSMDOBJINFO] WHERE OBJECT_ID='7FB344BA-27DF-4D8D-BFED-1C70D61EB613' --Buscar el proyecto
+
+
+PARA SABER DONDE SE USA UNA TABLE DEL WAREHOUSE EN MICRO
+SELECT * FROM [MSTR_MD_2020].[dbo].[DSSMDOBJINFO] WHERE OBJECT_NAME="" --DEFINICION DEL OBJETO
+
+select * from [dbo].[DSSMDOBJINFO]
+where OBJECT_ID in (
+select distinct DEPN_OBJID
+from [dbo].[DSSMDOBJDEPN]
+where OBJECT_ID in (
+select distinct [OBJECT_ID] from [dbo].[DSSMDOBJINFO]
+where OBJECT_NAME = 'h0_saldos'))   -- VER LAS DEPENDENCIAS DEL OBJETO
+
+PARA CONSULTAR EN QUE ETL SE USA UNA TABLA
+select f.foldername, p.*
+FROM [msdb].[dbo].[sysssispackages] as p
+join [msdb].[dbo].sysssispackagefolders as f
+on p.folderid = f.folderid
+  WHERE CONVERT(VARCHAR(MAX),CONVERT(VARBINARY(MAX), packagedata)) LIKE '%TC_MANTPAG_Preventivo_Detalle_OT%'
+
+
+VER QUE TABLAS USA:
+Al ejecutarlo en el WEB o en el Micro Developer Dektop se puede ver el SQL, ahi se pueden ver las tablas consultadas/utilizadas.
+
+VER EN QUE PAQUETES SSIS SE LLENA UNA TABLA DEL DWCORP:
+select f.foldername, p.*
+FROM [msdb].[dbo].[sysssispackages] as p
+join [msdb].[dbo].sysssispackagefolders as f
+on p.folderid = f.folderid
+WHERE CONVERT(VARCHAR(MAX),CONVERT(VARBINARY(MAX), packagedata)) LIKE '%h0_unco_camiones_ingresos%'
+
+PAQUETES SSIS:
+Para ver los paquetes SSIS deployados, me conecto al servidor (o desde mi maquina), desde el Management me conecto a Integration Server
+
+En el AGDGDAP01, disco G, hay una carpeta SSIS_desarrollos_ok, usada para crear los proyectos de visual studio integration service para desarrollar los SSIS.
+Abro visual studio, creo un proyecto nuevo de Integration service, elimino el package por defecto y luego importo desde sql el que tengo que modificar o desarrollo uno de cero.
+
+
+-UTILES SQL
+
+SP_WHO2 107 (id del proceso, lo veo abajo al lado del usuario con el que lo estoy corriendo)
+Para ver estado del proceso que estoy ejecutando
+Sin parametros me muestra todos los procesos activos/conexiones de la BD.
+
+dbcc inputbuffer(83) que esta haciendo este proceso
+
+exec Staging.dbo.sp_WhoIsActive
+Es un SP custum desarrollado tomando comandos propios del motor
+muestra solo los procesos/consulta que estan activos, realmente corriendo en el motor
+
+dbcc inputbuffer(159) comando propio del motor que muestra info del proceso
+
+Reemplazar letras/caracteres por numeros
+TRANSLATE(UCASE(RPPO),'0','ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()-=+/\{}[];:.,<>? ')
+
+-----------CAMBIO DE TABLA QUE USAN REPORTES - DOSIER
+mirar en los reportes los indicadores que usa
+copiar esos indicadores en la carpeta nueva
+mirar esos indicadores los hechos que usan
+copiarlos en una nueva carpeta
+modificar nombre y tabla que usan
+modificar los indicadores para que usen estos hechos nuevos
+ir al reporte y modificar para que use el indicador
+actualizar dossier
+
